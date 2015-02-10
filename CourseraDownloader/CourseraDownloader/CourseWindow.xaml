@@ -1,0 +1,75 @@
+﻿<Window x:Name="CourseWindow1" x:Class="CourseraDownloader.CourseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Coursera Downloader" Height="430" Width="650" Icon="Resources/coursera.png" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style TargetType="DataGrid">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="Gainsboro">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="3.5*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="3.5*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="1.6*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label x:Name="greetLabel" Grid.Row="1" Grid.Column="1" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+        <ComboBox x:Name="courseComboBox" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Text="Select course ..." IsEditable="True" IsReadOnly="True" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="14" SelectionChanged="courseComboBox_SelectionChanged"/>
+        <ComboBox x:Name="unitComboBox" Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="3" Text="Select unit ..." IsEditable="True" IsReadOnly="True" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="14" SelectionChanged="unitComboBox_SelectionChanged"/>
+        <DataGrid x:Name="materialDataGrid" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="9" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn CanUserReorder="False" CanUserResize="False" Width="5*">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Title"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Title}" ToolTip="{Binding Path=Title}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn CanUserReorder="False" CanUserResize="False" Width="1*">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="selectAllCheckBox" Content=" Select" FontSize="14" Checked="selectAllCheckBox_Checked" Unchecked="selectAllCheckBox_Unchecked"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ProgressBar x:Name="downloadProgressBar" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"/>
+        <TextBox x:Name="downloadPathTextBox" Grid.Row="5" Grid.Column="5" IsReadOnly="True" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="14"/>
+        <Button x:Name="browseButton" Grid.Row="5" Grid.Column="7" Content="Browse" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="14" Click="browseButton_Click"/>
+        <Button x:Name="downloadButton" Grid.Row="5" Grid.Column="9" Content="Download" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="14" Click="downloadButton_Click"/>
+    </Grid>
+</Window>
